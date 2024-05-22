@@ -12,42 +12,49 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 @Entity
-@Table(name = "PurchaseOrders")
+@Table(name = "PurchaseOrders") //Заказы
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class PurchaseOrders {
     @Id
-    @Column(name = "PurchaseOrderID")
+    @Column(name = "PurchaseOrderID") //Идентификатор заказа на поставку
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long purchaseOrderId;
 
-    @Column(name = "OrderId")
+    @Column(name = "OrderId") //Номер заказа
     private long orderId;
 
     @Column(name = "RecipientID") // получатель денежных средств
     private String recipientId;
 
-    @Column(name = "UserID")
+    @Column(name = "UserID") //ID пользователя
     private String userId;
 
     @Column(name = "PaymentID") // ИД платежа в платежной системе
     private String paymentId;
 
-    @Column(name = "Type")
+    @Column(name = "Type") //Тип
     private Type type;
 
-    @Column(name = "Status")
+    @Column(name = "Status") //статус
     private StatusPayment status;
 
-    @Column(name = "Amount")
+    @Column(name = "Amount") //Количество
     private BigDecimal amount;
 
-    @Column(name = "CreatedAt")
+    @Column(name = "CreatedAt") //Создан в
     private Timestamp createdAt;
 
-    @Column(name = "UpdatedAt")
+    @Column(name = "UpdatedAt") //Обновлено в
     private Timestamp updatedAt;
+
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinTable(
+//            name = "record_to_purchaseorders",
+//            joinColumns = { @JoinColumn(name = "record_id") },
+//            inverseJoinColumns = { @JoinColumn(name = "purchaseorder_id") }
+//    )
 
 }
