@@ -26,6 +26,9 @@ public class PurchaseOrders {
     @Column(name = "OrderId")
     private long orderId;
 
+    @Column(name = "RecipientID") // получатель денежных средств
+    private String recipientId;
+
     @Column(name = "UserID")
     private String userId;
 
