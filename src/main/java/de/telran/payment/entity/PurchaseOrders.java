@@ -21,20 +21,20 @@ import java.util.Set;
 @Setter
 public class PurchaseOrders {
     @Id
-    @Column(name = "PurchaseOrderID") //Идентификатор заказа на поставку
+    @Column(name = "PurchaseOrderId") //Идентификатор заказа на поставку
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long purchaseOrderId;
 
     @Column(name = "OrderId") //Номер заказа
     private long orderId;
 
-    @Column(name = "RecipientID") // получатель денежных средств
+    @Column(name = "RecipientId") // получатель денежных средств
     private String recipientId;
 
-    @Column(name = "UserID") //ID пользователя
+    @Column(name = "UserId") //ID пользователя
     private String userId;
 
-    @Column(name = "PaymentID") // ИД платежа в платежной системе
+    @Column(name = "PaymentId") // ИД платежа в платежной системе
     private String paymentId;
 
     @Column(name = "Type") //Тип
@@ -54,5 +54,4 @@ public class PurchaseOrders {
 
     @OneToMany(mappedBy = "purchaseOrders", cascade = CascadeType.ALL)
     private Set<Recipients> recipients = new HashSet<>();
-
 }
