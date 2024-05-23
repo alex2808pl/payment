@@ -15,7 +15,7 @@ import java.util.Set;
 
 
 @Entity
-@Table(name="Records") //записи
+@Table(name="Record") //запис
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,7 +23,7 @@ import java.util.Set;
 public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="RecordsId") //идентификатор
+    @Column(name="RecordId") //идентификатор
     private Long id;
 
     @Column(name="Parent") //источник
