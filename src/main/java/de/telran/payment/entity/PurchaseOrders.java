@@ -52,6 +52,6 @@ public class PurchaseOrders {
     @Column(name = "UpdatedAt") //Обновлено в
     private Timestamp updatedAt;
 
-    @OneToMany(mappedBy = "purchaseOrders", cascade = CascadeType.ALL)
-    private Set<Recipients> recipients = new HashSet<>();
+//    @OneToMany(mappedBy = "purchaseOrders", cascade = CascadeType.ALL)
+//    private Set<Recipients> recipients = new HashSet<>();
 }

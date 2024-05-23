@@ -41,6 +41,6 @@ public class Recipients {  // получатель денег
     private Timestamp updatedAt;
 
     //связь один ко многим с PurchaseOrders по полю userId
-    @OneToMany(mappedBy = "recipients", cascade = CascadeType.ALL)
-    private Set<PurchaseOrders> purchaseOrders = new HashSet<>();
+//    @OneToMany(mappedBy = "recipients", cascade = CascadeType.ALL)
+//    private Set<PurchaseOrders> purchaseOrders = new HashSet<>();
 }
