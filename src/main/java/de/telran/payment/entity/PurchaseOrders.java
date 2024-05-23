@@ -10,6 +10,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "PurchaseOrders") //Заказы
@@ -50,11 +52,7 @@ public class PurchaseOrders {
     @Column(name = "UpdatedAt") //Обновлено в
     private Timestamp updatedAt;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "record_to_purchaseorders",
-//            joinColumns = { @JoinColumn(name = "record_id") },
-//            inverseJoinColumns = { @JoinColumn(name = "purchaseorder_id") }
-//    )
+    @OneToMany(mappedBy = "purchaseOrders", cascade = CascadeType.ALL)
+    private Set<Recipients> recipients = new HashSet<>();
 
 }

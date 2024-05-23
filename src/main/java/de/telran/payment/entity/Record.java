@@ -10,10 +10,12 @@ import lombok.NoArgsConstructor;
 import org.apache.catalina.User;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
-@Table(name="records") //записи
+@Table(name="Records") //записи
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,27 +23,28 @@ import java.time.LocalDateTime;
 public class Record {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="id") //идентификатор
+    @Column(name="RecordsId") //идентификатор
     private Long id;
 
-    @Column(name="parent") //источник
+    @Column(name="Parent") //источник
     private Long parent;
 
-    @Column(name="title", length = 100) //заголовок
+    @Column(name="Title", length = 100) //заголовок
     private String title;
 
-    @Column(name="content") //содержание
+    @Column(name="Content") //содержание
     private String content;
 
     @ManyToOne
-    @JoinColumn(name="creator", nullable=false) //автор
+    @JoinColumn(name="Creator", nullable=false) //автор
     private User creator;
 
-    @Column(name="creation_time") //время создания
+    @Column(name="CreationTime") //время создания
     private LocalDateTime creationTime;
 
-    @Column(name="edited") //отредактировано
+    @Column(name="Edited") //отредактировано
     private Boolean edited;
 
-
+    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
+    private Set<Record> records = new HashSet<>();
 }
