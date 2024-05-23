@@ -29,8 +29,8 @@ public class PurchaseOrders {
     @Column(name = "RecipientID") // получатель денежных средств
     private String recipientId;
 
-    @Column(name = "UserID")
-    private String userId;
+    @Column(name = "SenderId") // отправитель денег
+    private long senderId;
 
     @Column(name = "PaymentID") // ИД платежа в платежной системе
     private String paymentId;
