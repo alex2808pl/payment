@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "Recipients")
@@ -39,5 +41,8 @@ public class Senders {  // отправитель денег
     private Timestamp updatedAt;
 
     //связь один ко многим с PurchaseOrders по полю
+    @OneToMany(mappedBy = "senders", cascade = CascadeType.ALL)
+    private Set<Recipients> recipients = new HashSet<>();
+
 
 }

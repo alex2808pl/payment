@@ -10,6 +10,8 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "PurchaseOrders") //Заказы
@@ -19,20 +21,20 @@ import java.sql.Timestamp;
 @Setter
 public class PurchaseOrders {
     @Id
-    @Column(name = "PurchaseOrderID") //Идентификатор заказа на поставку
+    @Column(name = "PurchaseOrderId") //Идентификатор заказа на поставку
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long purchaseOrderId;
 
     @Column(name = "OrderId") //Номер заказа
     private long orderId;
 
-    @Column(name = "RecipientID") // получатель денежных средств
+    @Column(name = "RecipientId") // получатель денежных средств
     private String recipientId;
 
-    @Column(name = "UserID") //ID пользователя
+    @Column(name = "UserId") //ID пользователя
     private String userId;
 
-    @Column(name = "PaymentID") // ИД платежа в платежной системе
+    @Column(name = "PaymentId") // ИД платежа в платежной системе
     private String paymentId;
 
     @Column(name = "Type") //Тип
@@ -50,11 +52,6 @@ public class PurchaseOrders {
     @Column(name = "UpdatedAt") //Обновлено в
     private Timestamp updatedAt;
 
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @JoinTable(
-//            name = "record_to_purchaseorders",
-//            joinColumns = { @JoinColumn(name = "record_id") },
-//            inverseJoinColumns = { @JoinColumn(name = "purchaseorder_id") }
-//    )
-
+    @OneToMany(mappedBy = "purchaseOrders", cascade = CascadeType.ALL)
+    private Set<Recipients> recipients = new HashSet<>();
 }
