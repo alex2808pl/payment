@@ -20,7 +20,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Record {
+public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="NoteId") //идентификатор
@@ -46,5 +46,5 @@ public class Record {
     private Boolean edited;
 
     @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
-    private Set<Record> records = new HashSet<>();
+    private Set<Note> records = new HashSet<>();
 }
