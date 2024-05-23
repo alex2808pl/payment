@@ -7,7 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.catalina.User;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -35,9 +34,8 @@ public class Note {
     @Column(name="Content") //содержание
     private String content;
 
-    @ManyToOne
     @JoinColumn(name="Creator", nullable=false) //автор
-    private User creator;
+    //private User creator;
 
     @Column(name="CreationTime") //время создания
     private LocalDateTime creationTime;
@@ -45,6 +43,6 @@ public class Note {
     @Column(name="Edited") //отредактировано
     private Boolean edited;
 
-    @OneToMany(mappedBy = "record", cascade = CascadeType.ALL)
-    private Set<Note> records = new HashSet<>();
+//    @OneToMany(mappedBy = "note", cascade = CascadeType.ALL)
+//    private Set<Note> notes = new HashSet<>();
 }
