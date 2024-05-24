@@ -6,7 +6,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
         http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-<!--<include file="db/changelog/changeSets/v0.1/createTablePurchaseOrders.sql"/>-->
-<!--<include file="db/changelog/changeSets/v0.1/insertPurchaseOrders.sql"/>-->
+<include file="db/changelog/changeSets/createTablePurchaseOrders.sql"/>
+<!--<include file="db/changelog/changeSets/insertPurchaseOrders.sql"/>-->
 
 </databaseChangeLog>
