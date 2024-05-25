@@ -7,41 +7,41 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "senders")
+@Table(name = "sender")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Sender {  // отправитель денег
     @Id
-    @Column(name = "RecipientId")
+//    @Column(name = "sender_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long recipientId;
+    private Long id;
 
-    @Column(name = "Name") // имя
+//    @Column(name = "name") // имя
     private String name;
 
-    @Column(name = "Iban") // счет
+//    @Column(name = "iban") // счет
     private String iban;
 
-    @Column(name = "Card") // номер карты
+//    @Column(name = "card") // номер карты
     private String card;
 
-    @Column(name = "paypalId") // ИД Paypal
+//    @Column(name = "paypal_id") // ИД Paypal
     private String paypalId;
 
-    @Column(name = "CreatedAt")
+//    @Column(name = "created_at")
     private Timestamp createdAt;
 
-    @Column(name = "UpdatedAt")
+//    @Column(name = "updated_at")
     private Timestamp updatedAt;
 
     //связь один ко многим с PurchaseOrders по полю
-//    @OneToMany(mappedBy = "senders", cascade = CascadeType.ALL)
-//    private Set<Recipients> recipients = new HashSet<>();
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private Set<PurchaseOrder> purchaseOrder = new HashSet<>();
 
-//    private PurchaseOrders purchaseOrders;
-//    private Note note;
 }

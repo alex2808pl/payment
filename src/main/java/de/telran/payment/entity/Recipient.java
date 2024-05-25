@@ -1,5 +1,6 @@
 package de.telran.payment.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,31 +19,30 @@ import java.util.Set;
 @Setter
 public class Recipient {  // получатель денег
     @Id
-    @Column(name = "SenderId")
+//    @Column(name = "sender_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long senderId;
+    private Long id;
 
-    @Column(name = "Name") // имя
+//    @Column(name = "name") // имя
     private String name;
 
-    @Column(name = "Iban") // счет
+//    @Column(name = "iban") // счет
     private String iban;
 
-    @Column(name = "Card") // номер карты
+//    @Column(name = "card") // номер карты
     private String card;
 
-    @Column(name = "paypalId") // ИД Paypal
+//    @Column(name = "paypal_id") // ИД Paypal
     private String paypalId;
 
-    @Column(name = "CreatedAt")
+//    @Column(name = "created_at")
     private Timestamp createdAt;
 
-    @Column(name = "UpdatedAt")
+//    @Column(name = "updated_at")
     private Timestamp updatedAt;
 
     //связь один ко многим с PurchaseOrders по полю userId
-    @OneToMany(mappedBy = "recipients", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<PurchaseOrder> purchaseOrder = new HashSet<>();
-//    private Note note;
-//    private Senders senders;
+    private Sender sender;
 }

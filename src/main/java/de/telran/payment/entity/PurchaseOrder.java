@@ -19,44 +19,42 @@ import java.sql.Timestamp;
 @Setter
 public class PurchaseOrder {
     @Id
-    //@Column(name = "PurchaseOrderId") //Идентификатор заказа на поставку
+//    @Column(name = "PurchaseOrderId") //Идентификатор заказа на поставку
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     //private long purchaseOrderId;
-    private long id;
+    private Long id;
 
-    @Column(name = "OrderId") //Номер заказа
+//    @Column(name = "order_id") //Номер заказа
     //@Column(name = "order_id") //Номер заказа is default
     //order_id
     private long orderId;
 
-    @Column(name = "RecipientId") // получатель денежных средств
+//    @Column(name = "recipient_id") // получатель денежных средств
     private String recipientId;
 
-    @Column(name = "UserId") //ID пользователя
+//    @Column(name = "user_id") //ID пользователя
     private String userId;
 
-    @Column(name = "PaymentId") // ИД платежа в платежной системе
+//    @Column(name = "payment_id") // ИД платежа в платежной системе
     private String paymentId;
 
-    @Column(name = "Type") //Тип
+//    @Column(name = "type") //Тип
     private Type type;
 
-    @Column(name = "Status") //статус
+//    @Column(name = "status") //статус
     private StatusPayment status;
 
-    @Column(name = "Amount") //Количество
+//    @Column(name = "amount") //Количество
     private BigDecimal amount;
 
-    @Column(name = "CreatedAt") //Создан в
+//    @Column(name = "created_at") //Создан в
     private Timestamp createdAt;
 
-    @Column(name = "UpdatedAt") //Обновлено в
+//    @Column(name = "updated_at") //Обновлено в
     private Timestamp updatedAt;
 
 //    @OneToMany(mappedBy = "purchaseOrders", cascade = CascadeType.ALL)
 //    private Set<Recipients> recipients = new HashSet<>();
-//    private Note note;
-//    private Senders senders;
-//    private Recipients recipients;
+    private Sender sender;
+    private Recipient recipient;
 }

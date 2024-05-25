@@ -1,0 +1,113 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet
+            id="1"
+            author="AndriiVytiahanets">
+        <comment>
+            create
+            table
+            purchase_order
+        </comment>
+        <createTable
+                tableName="sender">
+            <column name="id"
+                    autoIncrement="true"
+                    type="BIGINT">
+                <constraints
+                        primaryKey="true"
+                        nullable="false"
+                        primaryKeyName="sender_pkey"/>
+            </column>
+            <column name="name"
+                    type="VARCHAR(255)">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="iban"
+                    type="VARCHAR(255)">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="card"
+                    type="VARCHAR(255)">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="paypal_id"
+                    type="VARCHAR(255)">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="created_at"
+                    type="TIMESTAMP">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="updated_at"
+                    type="TIMESTAMP">
+                <constraints
+                        nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet
+            id="2"
+            author="AndriiVytiahanets">
+        <comment>add
+            test
+            data to
+            purchase_order
+        </comment>
+        <insert tableName="sender">
+            <column name="name"
+                    value="Andreas"/>
+            <column name="iban"
+                    value="UA343414452542"/>
+            <column name="card"
+                    value="321414"/>
+            <column name="paypal_id"
+                    value="341343"/>
+            <column name="created_at"
+                    value="2024-05-25 14:33:02.940000"/>
+            <column name="updated_at"
+                    value="2024-05-24 14:33:02.941000"/>
+        </insert>
+        <insert tableName="sender">
+            <column name="name"
+                    value="Andrey"/>
+            <column name="iban"
+                    value="UA13414123452542"/>
+            <column name="card"
+                    value="321414"/>
+            <column name="paypal_id"
+                    value="341343"/>
+            <column name="created_at"
+                    value="2024-05-25 14:33:02.940000"/>
+            <column name="updated_at"
+                    value="2024-05-24 14:33:02.941000"/>
+        </insert>
+        <insert tableName="sender">
+            <column name="name"
+                    value="Andre"/>
+            <column name="iban"
+                    value="UA32321323421"/>
+            <column name="card"
+                    value="321414"/>
+            <column name="paypal_id"
+                    value="341343"/>
+            <column name="created_at"
+                    value="2024-05-25 14:33:02.940000"/>
+            <column name="updated_at"
+                    value="2024-05-24 14:33:02.941000"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
