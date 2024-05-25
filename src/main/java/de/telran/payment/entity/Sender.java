@@ -7,20 +7,18 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name = "Recipients")
+@Table(name = "senders")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Recipients {  // получатель денег
+public class Sender {  // отправитель денег
     @Id
-    @Column(name = "SenderId")
+    @Column(name = "RecipientId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long senderId;
+    private long recipientId;
 
     @Column(name = "Name") // имя
     private String name;
@@ -40,7 +38,10 @@ public class Recipients {  // получатель денег
     @Column(name = "UpdatedAt")
     private Timestamp updatedAt;
 
-    //связь один ко многим с PurchaseOrders по полю userId
-//    @OneToMany(mappedBy = "recipients", cascade = CascadeType.ALL)
-//    private Set<PurchaseOrders> purchaseOrders = new HashSet<>();
+    //связь один ко многим с PurchaseOrders по полю
+//    @OneToMany(mappedBy = "senders", cascade = CascadeType.ALL)
+//    private Set<Recipients> recipients = new HashSet<>();
+
+//    private PurchaseOrders purchaseOrders;
+//    private Note note;
 }

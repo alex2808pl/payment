@@ -1,4 +1,4 @@
-package de.telran.payment.entity.enums;
+package de.telran.payment.enums;
 
 public enum Type {
     CARD,

@@ -1,7 +1,7 @@
 package de.telran.payment.entity;
 
-import de.telran.payment.entity.enums.StatusPayment;
-import de.telran.payment.entity.enums.Type;
+import de.telran.payment.enums.StatusPayment;
+import de.telran.payment.enums.Type;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,22 +10,24 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
-@Table(name = "PurchaseOrders") //Заказы
+@Table(name = "purchase_order") //Заказы
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class PurchaseOrders {
+public class PurchaseOrder {
     @Id
-    @Column(name = "PurchaseOrderId") //Идентификатор заказа на поставку
+    //@Column(name = "PurchaseOrderId") //Идентификатор заказа на поставку
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long purchaseOrderId;
+
+    //private long purchaseOrderId;
+    private long id;
 
     @Column(name = "OrderId") //Номер заказа
+    //@Column(name = "order_id") //Номер заказа is default
+    //order_id
     private long orderId;
 
     @Column(name = "RecipientId") // получатель денежных средств
@@ -54,4 +56,7 @@ public class PurchaseOrders {
 
 //    @OneToMany(mappedBy = "purchaseOrders", cascade = CascadeType.ALL)
 //    private Set<Recipients> recipients = new HashSet<>();
+//    private Note note;
+//    private Senders senders;
+//    private Recipients recipients;
 }

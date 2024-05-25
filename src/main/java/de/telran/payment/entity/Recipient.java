@@ -11,16 +11,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Recipients")
+@Table(name = "recipient")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Senders {  // отправитель денег
+public class Recipient {  // получатель денег
     @Id
-    @Column(name = "RecipientId")
+    @Column(name = "SenderId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long recipientId;
+    private long senderId;
 
     @Column(name = "Name") // имя
     private String name;
@@ -40,9 +40,9 @@ public class Senders {  // отправитель денег
     @Column(name = "UpdatedAt")
     private Timestamp updatedAt;
 
-    //связь один ко многим с PurchaseOrders по полю
-//    @OneToMany(mappedBy = "senders", cascade = CascadeType.ALL)
-//    private Set<Recipients> recipients = new HashSet<>();
-
-
+    //связь один ко многим с PurchaseOrders по полю userId
+    @OneToMany(mappedBy = "recipients", cascade = CascadeType.ALL)
+    private Set<PurchaseOrder> purchaseOrder = new HashSet<>();
+//    private Note note;
+//    private Senders senders;
 }
