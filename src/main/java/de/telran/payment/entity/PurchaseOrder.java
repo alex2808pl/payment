@@ -30,10 +30,10 @@ public class PurchaseOrder {
     private long orderId;
 
 //    @Column(name = "recipient_id") // получатель денежных средств
-    private String recipientId;
+//    private String recipientId;
 
 //    @Column(name = "user_id") //ID пользователя
-    private String userId;
+//    private String userId;//senderId???
 
 //    @Column(name = "payment_id") // ИД платежа в платежной системе
     private String paymentId;
@@ -53,8 +53,13 @@ public class PurchaseOrder {
 //    @Column(name = "updated_at") //Обновлено в
     private Timestamp updatedAt;
 
-//    @OneToMany(mappedBy = "purchaseOrders", cascade = CascadeType.ALL)
-//    private Set<Recipients> recipients = new HashSet<>();
-    private Sender sender;
+    //ManyToOne Recipient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="userId", nullable=false)
     private Recipient recipient;
+
+    //ManyToOne Recipient
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="recipientId", nullable=false)
+    private Sender sender;
 }

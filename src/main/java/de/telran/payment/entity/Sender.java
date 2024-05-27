@@ -40,7 +40,7 @@ public class Sender {  // отправитель денег
 //    @Column(name = "updated_at")
     private Timestamp updatedAt;
 
-    //связь один ко многим с PurchaseOrders по полю
+    //связь один ко многим с PurchaseOrders по полю recipientId
     @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
     private Set<PurchaseOrder> purchaseOrder = new HashSet<>();
 

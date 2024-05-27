@@ -44,5 +44,5 @@ public class Recipient {  // получатель денег
     //связь один ко многим с PurchaseOrders по полю userId
     @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<PurchaseOrder> purchaseOrder = new HashSet<>();
-    private Sender sender;
+
 }
