@@ -11,36 +11,29 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Recipients")
+@Table(name = "Senders")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
-public class Recipients {  // получатель денег
+public class Sender {
     @Id
     @Column(name = "SenderId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long senderId;
+    private Long id;
 
-    @Column(name = "Name") // имя
     private String name;
 
-    @Column(name = "Iban") // счет
     private String iban;
 
-    @Column(name = "Card") // номер карты
     private String card;
 
-    @Column(name = "paypalId") // ИД Paypal
     private String paypalId;
 
-    @Column(name = "CreatedAt")
     private Timestamp createdAt;
 
-    @Column(name = "UpdatedAt")
     private Timestamp updatedAt;
 
-    //связь один ко многим с PurchaseOrders по полю userId
-//    @OneToMany(mappedBy = "recipients", cascade = CascadeType.ALL)
-//    private Set<PurchaseOrders> purchaseOrders = new HashSet<>();
+    @OneToMany(mappedBy = "sender", cascade = CascadeType.ALL)
+    private Set<PurchaseOrder> purchaseOrder = new HashSet<>();
 }
