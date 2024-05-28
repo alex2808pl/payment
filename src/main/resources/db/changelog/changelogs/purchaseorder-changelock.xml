@@ -1,0 +1,149 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext
+        https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
+
+    <changeSet
+            id="1"
+            author="AndriiVytiahanets">
+        <comment>
+            create
+            table
+            purchase_order
+        </comment>
+        <createTable
+                tableName="purchase_order">
+            <column name="id"
+                    autoIncrement="true"
+                    type="BIGINT">
+                <constraints
+                        primaryKey="true"
+                        nullable="false"
+                        primaryKeyName="purchase_order_pkey"/>
+            </column>
+            <column name="order_id"
+                    type="BIGINT">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="recipient_id"
+                    type="VARCHAR(255)">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="user_id"
+                    type="VARCHAR(255)">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="payment_id"
+                    type="VARCHAR(255)">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="type"
+                    type="ENUM('CARD','CASH','PAYPAL')">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="status"
+                    type="ENUM('NEW','PAID','CANCEL','SUSPENDED')">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="amount"
+                    type="BIGINT">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="created_at"
+                    type="TIMESTAMP">
+                <constraints
+                        nullable="false"/>
+            </column>
+            <column name="updated_at"
+                    type="TIMESTAMP">
+                <constraints
+                        nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet
+            id="2"
+            author="AndriiVytiahanets">
+        <comment>add
+            test
+            data to
+            purchase_order
+        </comment>
+        <insert tableName="purchase_order">
+            <column name="order_id"
+                    value="323132"/>
+            <column name="recipient_id"
+                    value="452542"/>
+            <column name="user_id"
+                    value="321414"/>
+            <column name="payment_id"
+                    value="341343"/>
+            <column name="type"
+                    value="CARD"/>
+            <column name="status"
+                    value="NEW"/>
+            <column name="amount"
+                    value="2321000"/>
+            <column name="created_at"
+                    value="2024-05-25 14:33:02.940000"/>
+            <column name="updated_at"
+                    value="2024-05-24 14:33:02.941000"/>
+        </insert>
+
+        <insert tableName="purchase_order">
+            <column name="order_id"
+                    value="343431"/>
+            <column name="recipient_id"
+                    value="34434"/>
+            <column name="user_id"
+                    value="343342"/>
+            <column name="payment_id"
+                    value="3434324"/>
+            <column name="type"
+                    value="CARD"/>
+            <column name="status"
+                    value="NEW"/>
+            <column name="amount"
+                    value="344233"/>
+            <column name="created_at"
+                    value="2024-05-25 14:33:02.940000"/>
+            <column name="updated_at"
+                    value="2024-05-26 14:33:02.941000"/>
+        </insert>
+
+        <insert tableName="purchase_order">
+            <column name="order_id"
+                    value="34334"/>
+            <column name="recipient_id"
+                    value="34434"/>
+            <column name="user_id"
+                    value="34343"/>
+            <column name="payment_id"
+                    value="34243"/>
+            <column name="type"
+                    value="CARD"/>
+            <column name="status"
+                    value="NEW"/>
+            <column name="amount"
+                    value="34343"/>
+            <column name="created_at"
+                    value="2024-05-27 14:33:02.940000"/>
+            <column name="updated_at"
+                    value="2024-05-29 14:33:02.941000"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>
