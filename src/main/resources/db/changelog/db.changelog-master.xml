@@ -13,7 +13,5 @@
             file="db/changelog/changelogs/recipient-changelock.xml"/>
     <include
             file="db/changelog/changelogs/sender-changelock.xml"/>
-    <!--<include file="db/changelog/changeSets/createTablePurchaseOrders.sql"/>-->
-    <!--<include file="db/changelog/changeSets/insertPurchaseOrders.sql"/>-->
 
 </databaseChangeLog>
