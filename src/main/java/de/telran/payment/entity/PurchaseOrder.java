@@ -24,13 +24,13 @@ public class PurchaseOrder {
 
     private long orderId;
 
-    @Column(name = "RecipientId") // получатель денежных средств
-    private String recipientId;
+    //@Column(name = "RecipientId") // получатель денежных средств
+    //private String recipientId;
 
-    @Column(name = "SenderId") //ID пользователя
-    private String senderId;
+    //@Column(name = "SenderId") //ID пользователя
+    //private String senderId;
 
-    @Column(name = "PaymentId") // ИД платежа в платежной системе
+    //@Column(name = "PaymentId") // ИД платежа в платежной системе
     private String paymentId;
 
     private Type type;
@@ -39,15 +39,17 @@ public class PurchaseOrder {
 
     private BigDecimal amount;
 
+    //@Column(name = "created_at")
     private Timestamp createdAt;
 
+    //@Column(name = "updatedAt")
     private Timestamp updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="userId", nullable=false)
+    @JoinColumn(name="recipientId", nullable=false)
     private Recipient recipient;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="recipientId", nullable=false)
+    @JoinColumn(name="senderId", nullable=false)
     private Sender sender;
 }

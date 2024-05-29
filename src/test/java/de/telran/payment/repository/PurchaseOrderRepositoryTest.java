@@ -38,7 +38,7 @@ class PurchaseOrderRepositoryTest {
     @Test
     void testGet() {
         PurchaseOrder purchaseOrderExpected = new PurchaseOrder();
-
+        purchaseOrderExpected.setId(1L);
         Optional<PurchaseOrder> purchaseOrderActual = purchaseOrderTest.findById(1L);
         Assertions.assertTrue(purchaseOrderActual.isPresent());
         Assertions.assertEquals(purchaseOrderExpected.getId(), purchaseOrderActual.get().getId());
@@ -48,15 +48,16 @@ class PurchaseOrderRepositoryTest {
     @Test
     void testInsert() {
         PurchaseOrder purchaseOrderExpected = new PurchaseOrder();
-        //purchaseOrderExpected.setRecipient();
+        Recipient recipientTest = new Recipient();
         purchaseOrderExpected.setOrderId(323132L);
-        purchaseOrderExpected.setRecipientId("452542");
+        //purchaseOrderExpected.setRecipientId("452542");
         purchaseOrderExpected.setType(CARD);
         purchaseOrderExpected.setStatus(NEW);
         purchaseOrderExpected.setAmount(BigDecimal.valueOf(2321000));
         purchaseOrderExpected.setCreatedAt(Timestamp.valueOf("2024-05-25 14:33:02.940000"));
         purchaseOrderExpected.setUpdatedAt(Timestamp.valueOf("2024-05-24 14:33:02.941000"));
-        Recipient recipientTest = new Recipient();
+        recipientTest.setRecipient(purchaseOrderExpected);
+
 
         recipientTest.setId(1L);
         purchaseOrderExpected.setRecipient(recipientTest);
