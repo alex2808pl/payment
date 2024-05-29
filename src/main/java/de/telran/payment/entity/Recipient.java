@@ -36,4 +36,5 @@ public class Recipient {
 
     @OneToMany(mappedBy = "recipient", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<PurchaseOrder> purchaseOrder = new HashSet<>();
+
 }
