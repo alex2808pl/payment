@@ -35,7 +35,7 @@
                 <constraints
                         nullable="false"/>
             </column>
-            <column name="user_id"
+            <column name="sender_id"
                     type="VARCHAR(255)">
                 <constraints
                         nullable="false"/>
@@ -86,7 +86,7 @@
                     value="323132"/>
             <column name="recipient_id"
                     value="452542"/>
-            <column name="user_id"
+            <column name="sender_id"
                     value="321414"/>
             <column name="payment_id"
                     value="341343"/>
@@ -107,7 +107,7 @@
                     value="343431"/>
             <column name="recipient_id"
                     value="34434"/>
-            <column name="user_id"
+            <column name="sender_id"
                     value="343342"/>
             <column name="payment_id"
                     value="3434324"/>
@@ -128,7 +128,7 @@
                     value="34334"/>
             <column name="recipient_id"
                     value="34434"/>
-            <column name="user_id"
+            <column name="sender_id"
                     value="34343"/>
             <column name="payment_id"
                     value="34243"/>
