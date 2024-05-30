@@ -11,14 +11,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Table(name = "Senders")
+@Table(name = "sender")
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
 public class Sender {
     @Id
-    @Column(name = "SenderId")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

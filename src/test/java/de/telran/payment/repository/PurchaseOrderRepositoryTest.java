@@ -4,9 +4,6 @@ import de.telran.payment.entity.PurchaseOrder;
 
 import de.telran.payment.entity.Recipient;
 import de.telran.payment.entity.Sender;
-import de.telran.payment.enums.StatusPayment;
-import de.telran.payment.enums.Type;
-import jakarta.persistence.Column;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -17,7 +14,7 @@ import java.util.Optional;
 
 import static de.telran.payment.enums.StatusPayment.NEW;
 import static de.telran.payment.enums.Type.CARD;
-import static org.junit.jupiter.api.Assertions.*;
+
 @DataJpaTest
 class PurchaseOrderRepositoryTest {
     @Autowired
