@@ -20,18 +20,6 @@ class PurchaseOrderRepositoryTest {
     @Autowired
     private PurchaseOrderRepository purchaseOrderTest;
 
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
-
-    @Test
-    void deleteInBatch() {
-    }
-
     @Test
     void testGet() {
         PurchaseOrder purchaseOrderExpected = new PurchaseOrder();
@@ -74,7 +62,6 @@ class PurchaseOrderRepositoryTest {
     void testEdit() {
         Optional<PurchaseOrder> purchaseOrderDb = purchaseOrderTest.findById(1L);
         Assertions.assertTrue(purchaseOrderDb.isPresent());
-        //System.out.println(purchaseOrderDb.get().getId());
 
         PurchaseOrder purchaseOrderExpected = purchaseOrderDb.get();
         purchaseOrderExpected.setId(1L);

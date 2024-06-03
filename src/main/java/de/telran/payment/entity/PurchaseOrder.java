@@ -20,29 +20,13 @@ import java.sql.Timestamp;
 public class PurchaseOrder {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private long id;
     private long orderId;
-
-    //@Column(name = "RecipientId") // получатель денежных средств
-    //private String recipientId;
-
-    //@Column(name = "SenderId") //ID пользователя
-    //private String senderId;
-
-    //@Column(name = "PaymentId") // ИД платежа в платежной системе
     private String paymentId;
-
     private Type type;
-
     private StatusPayment status;
-
     private BigDecimal amount;
-
-    //@Column(name = "created_at")
     private Timestamp createdAt;
-
-    //@Column(name = "updatedAt")
     private Timestamp updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
