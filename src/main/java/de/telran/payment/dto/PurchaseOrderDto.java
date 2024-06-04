@@ -1,25 +1,17 @@
-package de.telran.payment.entity;
+package de.telran.payment.dto;
 
+import de.telran.payment.entity.Recipient;
+import de.telran.payment.entity.Sender;
 import de.telran.payment.enums.StatusPayment;
 import de.telran.payment.enums.Type;
-import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "purchase_order")
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
-public class PurchaseOrder {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PurchaseOrderDto {
     private Long id;
 
     private long orderId;
