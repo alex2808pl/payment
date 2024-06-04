@@ -1,14 +1,12 @@
 package de.telran.payment.controller;
 
+import de.telran.payment.dto.PurchaseOrderDto;
 import de.telran.payment.dto.RecipientDto;
 import de.telran.payment.service.RecipientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +22,13 @@ public class RecipientController {
     public List<RecipientDto> getRecipient(){
         return recipientService.getRecipient();
     }
+
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public RecipientDto insertRecipient(@RequestBody RecipientDto recipientDto) {
+        return recipientService.insertRecipient(recipientDto);
+    }
+
 
 
 

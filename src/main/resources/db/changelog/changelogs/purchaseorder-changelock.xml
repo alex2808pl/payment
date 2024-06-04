@@ -85,9 +85,9 @@
             <column name="order_id"
                     value="323132"/>
             <column name="recipient_id"
-                    value="452542"/>
+                    value="1"/>
             <column name="sender_id"
-                    value="321414"/>
+                    value="2"/>
             <column name="payment_id"
                     value="341343"/>
             <column name="type"
@@ -106,9 +106,9 @@
             <column name="order_id"
                     value="343431"/>
             <column name="recipient_id"
-                    value="34434"/>
+                    value="2"/>
             <column name="sender_id"
-                    value="343342"/>
+                    value="1"/>
             <column name="payment_id"
                     value="3434324"/>
             <column name="type"
@@ -127,9 +127,9 @@
             <column name="order_id"
                     value="34334"/>
             <column name="recipient_id"
-                    value="34434"/>
+                    value="2"/>
             <column name="sender_id"
-                    value="34343"/>
+                    value="2"/>
             <column name="payment_id"
                     value="34243"/>
             <column name="type"
