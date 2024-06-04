@@ -1,10 +1,13 @@
 package de.telran.payment.service;
 
+import de.telran.payment.config.MapperUtil;
 import de.telran.payment.dto.PurchaseOrderDto;
+import de.telran.payment.dto.RecipientDto;
 import de.telran.payment.dto.SenderDto;
 import de.telran.payment.entity.PurchaseOrder;
 import de.telran.payment.entity.Recipient;
 import de.telran.payment.entity.Sender;
+import de.telran.payment.mapper.Mappers;
 import de.telran.payment.repository.PurchaseOrderRepository;
 import de.telran.payment.repository.RecipientRepository;
 import de.telran.payment.repository.SenderRepository;
@@ -23,17 +26,22 @@ public class PurchaseOrderService {
     private final SenderRepository senderRepository;
     private final RecipientRepository recipientRepository;
 
+    private final Mappers mappers;
+
     public List<PurchaseOrderDto> getPurchaseOrder() {
         List<PurchaseOrder> purchaseOrderList = purchaseOrderRepository.findAll();
+        List<PurchaseOrderDto> purchaseOrderDtoList = MapperUtil.convertList(purchaseOrderList, mappers::convertToPurchaseOrderDto);
+
+
 // преобразую пока вручную
-        List<PurchaseOrderDto> purchaseOrderDtoList =
-                purchaseOrderList.stream()
-                        .map(f -> PurchaseOrderDto.builder()
-                                .id(f.getId())
-                                .orderId(f.getOrderId())
-                                .sender(new SenderDto())
-                                .build())
-                        .collect(Collectors.toList());
+//        List<PurchaseOrderDto> purchaseOrderDtoList =
+//                purchaseOrderList.stream()
+//                        .map(f -> PurchaseOrderDto.builder()
+//                                .id(f.getId())
+//                                .orderId(f.getOrderId())
+//                                .sender(new SenderDto())
+//                                .build())
+//                        .collect(Collectors.toList());
         return purchaseOrderDtoList;
     }
 
