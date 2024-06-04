@@ -2,8 +2,13 @@ package de.telran.payment.dto;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import de.telran.payment.entity.Recipient;
+import de.telran.payment.entity.Sender;
 import de.telran.payment.enums.StatusPayment;
 import de.telran.payment.enums.Type;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,13 +22,20 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @Builder
 public class PurchaseOrderDto {
-    private long id;
+    private Long id;
+
     private long orderId;
+
     private String paymentId;
+
     private Type type;
+
     private StatusPayment status;
+
     private BigDecimal amount;
+
     private Timestamp createdAt;
+
     private Timestamp updatedAt;
 
     @JsonInclude(JsonInclude.Include.NON_NULL)
@@ -34,4 +46,3 @@ public class PurchaseOrderDto {
     @JsonProperty("sender")
     private SenderDto sender;
 }
-

@@ -4,7 +4,6 @@ import de.telran.payment.dto.PurchaseOrderDto;
 import de.telran.payment.service.PurchaseOrderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,5 +44,3 @@ public class PurchaseOrderController {
         return purchaseOrderService.updatePurchaseOrder(purchaseOrderDto);
     }
 }
-
-
