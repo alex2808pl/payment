@@ -31,10 +31,10 @@ public class Mappers {
     }
 
     public PurchaseOrderDto convertToPurchaseOrderDto(PurchaseOrder purchaseOrder) {
-        PurchaseOrderDto recipientDto = modelMapper.map(purchaseOrder, PurchaseOrderDto.class); //автомат
+        PurchaseOrderDto purchaseOrderDto = modelMapper.map(purchaseOrder, PurchaseOrderDto.class); //автомат
         //подключаем руками нужный нам конвертор для подчиненного объекта, вместо автоматического
-        recipientDto.setRecipient(convertToRecipientDto(purchaseOrder.getRecipient()));
-        return recipientDto;
+        purchaseOrderDto.setRecipient(convertToRecipientDto(purchaseOrder.getRecipient()));
+        return purchaseOrderDto;
     }
 
 
