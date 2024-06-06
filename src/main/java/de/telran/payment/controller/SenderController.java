@@ -33,6 +33,7 @@ public class SenderController {
     public void deleteSenderById(@PathVariable Long id) {
         senderService.deleteSenderById(id);
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SenderDto insertSender(@RequestBody SenderDto senderDto) {
