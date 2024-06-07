@@ -4,7 +4,6 @@ import de.telran.payment.dto.SenderDto;
 import de.telran.payment.service.SenderService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,6 +32,7 @@ public class SenderController {
     public void deleteSenderById(@PathVariable Long id) {
         senderService.deleteSenderById(id);
     }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public SenderDto insertSender(@RequestBody SenderDto senderDto) {
