@@ -52,6 +52,4 @@ public class Mappers {
         sender.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
         return sender;
     }
-
-
 }
