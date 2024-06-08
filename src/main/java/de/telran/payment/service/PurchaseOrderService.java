@@ -56,7 +56,6 @@ public class PurchaseOrderService {
 
     public PurchaseOrderDto updatePurchaseOrder(PurchaseOrderDto purchaseOrderDto) {
         if (purchaseOrderDto.getId() <= 0) {
-            // При редактировании такого быть не должно, нужно вывести пользователю ошибку
             return null;
         }
         // Ищем такой объект в БД
