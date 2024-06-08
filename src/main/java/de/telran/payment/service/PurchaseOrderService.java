@@ -46,11 +46,12 @@ public class PurchaseOrderService {
     }
 
     public PurchaseOrderDto getPurchaseOrderById(Long id) {
-        Optional<PurchaseOrder> purchaseOrder = purchaseOrderRepository.findById(id);
+        Optional<PurchaseOrder> purchaseOrderOptional = purchaseOrderRepository.findById(id);
         PurchaseOrderDto purchaseOrderDto = null;
-        if (purchaseOrder.isPresent()) {
-            purchaseOrderDto = new PurchaseOrderDto(purchaseOrder.get().getId(),
-                    purchaseOrder.get().getOrderId(), purchaseOrder.get().getPaymentId(), purchaseOrder.get().getType(), purchaseOrder.get().getStatus(), purchaseOrder.get().getAmount(), purchaseOrder.get().getCreatedAt(), purchaseOrder.get().getUpdatedAt(), null, null);
+        if (purchaseOrderOptional.isPresent()) {
+            purchaseOrderDto = purchaseOrderOptional.map(mappers::convertToPurchaseOrderDto).orElse(null);
+//            purchaseOrderDto = new PurchaseOrderDto(purchaseOrder.get().getId(),
+//                    purchaseOrder.get().getOrderId(), purchaseOrder.get().getPaymentId(), purchaseOrder.get().getType(), purchaseOrder.get().getStatus(), purchaseOrder.get().getAmount(), purchaseOrder.get().getCreatedAt(), purchaseOrder.get().getUpdatedAt(), null, null);
         }
         return purchaseOrderDto;
     }
@@ -63,27 +64,30 @@ public class PurchaseOrderService {
     }
 
     public PurchaseOrderDto insertPurchaseOrder(PurchaseOrderDto purchaseOrderDto) {
-
+        PurchaseOrder newPurchaseOrder = mappers.convertToPurchaseOrder(purchaseOrderDto);
+        newPurchaseOrder.setId(0);
+        PurchaseOrder savedPurchaseOrder = purchaseOrderRepository.save(newPurchaseOrder);
+        return mappers.convertToPurchaseOrderDto(savedPurchaseOrder);
 
         // Получаю связанного Sender
-        SenderDto senderDto = purchaseOrderDto.getSender();
-        Sender sender = null;
-        Recipient recipient = null;
-        if (senderDto != null && senderDto.getId() != null) {
-        }
-        Optional<Sender> senderOptional = senderRepository.findById(senderDto.getId());
-        if (senderOptional.isPresent()) {
-            sender = senderOptional.get();
-        }
-
-        // Преобразовую Dto B Entity
-        PurchaseOrder purchaseOrder = new PurchaseOrder(0l, purchaseOrderDto.getOrderId(), purchaseOrderDto.getPaymentId(), purchaseOrderDto.getType(),  purchaseOrderDto.getStatus(), purchaseOrderDto.getAmount(),purchaseOrderDto.getCreatedAt(), purchaseOrderDto.getUpdatedAt(), recipient, sender);
-        //Сохраняю в БД
-        purchaseOrder = purchaseOrderRepository.save(purchaseOrder);
-        // трансформируем в Dto
-        PurchaseOrderDto responsePurchaseOrderDto = new PurchaseOrderDto(purchaseOrder.getId(),
-                purchaseOrder.getOrderId(), purchaseOrder.getPaymentId(), purchaseOrder.getType(), purchaseOrder.getStatus(), purchaseOrder.getAmount(), purchaseOrder.getCreatedAt(), purchaseOrder.getUpdatedAt(), null, null);
-        return responsePurchaseOrderDto;
+//        SenderDto senderDto = purchaseOrderDto.getSender();
+//        Sender sender = null;
+//        Recipient recipient = null;
+//        if (senderDto != null && senderDto.getId() != null) {
+//        }
+//        Optional<Sender> senderOptional = senderRepository.findById(senderDto.getId());
+//        if (senderOptional.isPresent()) {
+//            sender = senderOptional.get();
+//        }
+//
+//        // Преобразовую Dto B Entity
+//        PurchaseOrder purchaseOrder = new PurchaseOrder(0l, purchaseOrderDto.getOrderId(), purchaseOrderDto.getPaymentId(), purchaseOrderDto.getType(),  purchaseOrderDto.getStatus(), purchaseOrderDto.getAmount(),purchaseOrderDto.getCreatedAt(), purchaseOrderDto.getUpdatedAt(), recipient, sender);
+//        //Сохраняю в БД
+//        purchaseOrder = purchaseOrderRepository.save(purchaseOrder);
+//        // трансформируем в Dto
+//        PurchaseOrderDto responsePurchaseOrderDto = new PurchaseOrderDto(purchaseOrder.getId(),
+//                purchaseOrder.getOrderId(), purchaseOrder.getPaymentId(), purchaseOrder.getType(), purchaseOrder.getStatus(), purchaseOrder.getAmount(), purchaseOrder.getCreatedAt(), purchaseOrder.getUpdatedAt(), null, null);
+//        return responsePurchaseOrderDto;
 
     }
 
