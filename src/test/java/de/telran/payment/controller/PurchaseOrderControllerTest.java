@@ -20,8 +20,7 @@ import static de.telran.payment.enums.StatusPayment.NEW;
 import static de.telran.payment.enums.Type.CARD;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -100,7 +99,38 @@ public class PurchaseOrderControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.id").value(1))
-                .andExpect(jsonPath("$.type").value(purchaseOrderInsert.getOrderId()));
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.orderId").value(323132L))
+                .andExpect(jsonPath("$.paymentId").value("341343"))
+                .andExpect(jsonPath("$.type").value(CARD))
+                .andExpect(jsonPath("$.status").value(NEW))
+                .andExpect(jsonPath("$.amount").value(BigDecimal.valueOf(2321000)))
+                .andExpect(jsonPath("$.createdAt").exists())
+                .andExpect(jsonPath("$.updatedAt").exists());
+    }
+    @Test
+    void updatePurchaseOrderTest() throws Exception {
+        PurchaseOrderDto expectedProduct = PurchaseOrderDto.builder()
+                .id(1L)
+                .orderId(323132L)
+                .paymentId("341343")
+                .type(CARD)
+                .status(NEW)
+                .amount(BigDecimal.valueOf(2321000))
+                .createdAt(Timestamp.valueOf(LocalDateTime.now()))
+                .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
+                .build();
+
+        when(purchaseOrderServiceMock.updatePurchaseOrder(any(PurchaseOrderDto.class))).thenReturn(expectedProduct);
+        this.mockMvc.perform(put("/products")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content("""
+                                {
+                                  "id": 1
+                                }
+                                """))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.productId").value(1L));
     }
 }
