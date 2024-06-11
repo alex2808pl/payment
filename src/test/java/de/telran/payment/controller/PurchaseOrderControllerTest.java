@@ -77,8 +77,8 @@ public class PurchaseOrderControllerTest {
     @Test
     void getPurchaseOrderTest() throws Exception {
         when(purchaseOrderServiceMock.getPurchaseOrder()).thenReturn(List.of(purchaseOrderExpected1, purchaseOrderExpected2));
-        mockMvc.perform(get("/purchaseOrder")).andDo(print())
-                .andExpect(status().is(404))
+        mockMvc.perform(get("/purchase_order")).andDo(print())
+                .andExpect(status().isOk())
                 .andExpect(jsonPath("$..id").exists());
     }
     @Test
