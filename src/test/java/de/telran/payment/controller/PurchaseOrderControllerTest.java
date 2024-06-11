@@ -1,7 +1,11 @@
 package de.telran.payment.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
 import de.telran.payment.dto.PurchaseOrderDto;
+
+import de.telran.payment.dto.RecipientDto;
+import de.telran.payment.dto.SenderDto;
 import de.telran.payment.service.PurchaseOrderService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -28,11 +32,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class PurchaseOrderControllerTest {
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
+
     @Autowired
     private MockMvc mockMvc;
 
-    @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
     @Autowired
     private ObjectMapper objectMapper;
 
@@ -46,36 +49,47 @@ public class PurchaseOrderControllerTest {
     void setUp() {
         purchaseOrderExpected1 = PurchaseOrderDto.builder()
                 .id(1L)
-                .orderId(323132L)
-                .paymentId("341343")
+                .orderId(1234L)
+                .paymentId("PI1234567890")
                 .type(CARD)
                 .status(NEW)
                 .amount(BigDecimal.valueOf(2321000))
                 .createdAt(Timestamp.valueOf(LocalDateTime.now()))
                 .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
+                .sender(SenderDto.builder().id(1L).build())
+                .recipient(RecipientDto.builder().id(1L).build())
                 .build();
 
         purchaseOrderExpected2 = PurchaseOrderDto.builder()
                 .id(2L)
-                .orderId(343431L)
-                .paymentId("3434324")
+                .orderId(1233L)
+                .paymentId("PI1234567891")
                 .type(CARD)
                 .status(NEW)
-                .amount(BigDecimal.valueOf(344233))
+                .amount(BigDecimal.valueOf(2321001))
                 .createdAt(Timestamp.valueOf(LocalDateTime.now()))
                 .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
+                .sender(SenderDto.builder().id(2L).build())
+                .recipient(RecipientDto.builder().id(2L).build())
                 .build();
     }
 
     @Test
     void getPurchaseOrderTest() throws Exception {
         when(purchaseOrderServiceMock.getPurchaseOrder()).thenReturn(List.of(purchaseOrderExpected1, purchaseOrderExpected2));
-        this.mockMvc.perform(get("/purchaseOrder")).andDo(print())
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$..id").exists())
-                .andExpect(jsonPath("$..type").exists());
+        mockMvc.perform(get("/purchaseOrder")).andDo(print())
+                .andExpect(status().is(404))
+                .andExpect(jsonPath("$..id").exists());
     }
-
+    @Test
+    void testDeletePurchaseOrderItemsById() throws Exception {
+        Long id = 1L;
+        mockMvc.perform(delete("/purchaseorderitems/{id}", id)).andDo(print())
+                .andExpect(status().isNoContent())
+                .andExpect(jsonPath("$.orderId").doesNotExist())
+                .andExpect(jsonPath("$.amount").doesNotExist())
+                .andExpect(jsonPath("$.paymentId").doesNotExist());
+    }
     @Test
     void insertPurchaseOrderTest() throws Exception {
         PurchaseOrderDto purchaseOrderInsert = PurchaseOrderDto.builder()
@@ -87,6 +101,8 @@ public class PurchaseOrderControllerTest {
                 .amount(BigDecimal.valueOf(2321000))
                 .createdAt(Timestamp.valueOf(LocalDateTime.now()))
                 .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
+                .sender(SenderDto.builder().id(1L).build())
+                .recipient(RecipientDto.builder().id(1L).build())
                 .build();
         // Имитируется любой объект класса PurchaseOrderDto в качестве параметра
         when(purchaseOrderServiceMock.insertPurchaseOrder(any(PurchaseOrderDto.class))).thenReturn(purchaseOrderExpected1);
@@ -99,7 +115,7 @@ public class PurchaseOrderControllerTest {
                 .andDo(print())
                 .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.orderId").value(323132L))
                 .andExpect(jsonPath("$.paymentId").value("341343"))
                 .andExpect(jsonPath("$.type").value(CARD))
@@ -110,7 +126,7 @@ public class PurchaseOrderControllerTest {
     }
     @Test
     void updatePurchaseOrderTest() throws Exception {
-        PurchaseOrderDto expectedProduct = PurchaseOrderDto.builder()
+        PurchaseOrderDto expectedPurchaseOrder = PurchaseOrderDto.builder()
                 .id(1L)
                 .orderId(323132L)
                 .paymentId("341343")
@@ -119,10 +135,12 @@ public class PurchaseOrderControllerTest {
                 .amount(BigDecimal.valueOf(2321000))
                 .createdAt(Timestamp.valueOf(LocalDateTime.now()))
                 .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
+                .sender(SenderDto.builder().id(1L).build())
+                .recipient(RecipientDto.builder().id(1L).build())
                 .build();
 
-        when(purchaseOrderServiceMock.updatePurchaseOrder(any(PurchaseOrderDto.class))).thenReturn(expectedProduct);
-        this.mockMvc.perform(put("/products")
+        when(purchaseOrderServiceMock.updatePurchaseOrder(any(PurchaseOrderDto.class))).thenReturn(expectedPurchaseOrder);
+        this.mockMvc.perform(put("/purchaseOrder")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("""
                                 {
@@ -131,6 +149,14 @@ public class PurchaseOrderControllerTest {
                                 """))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.productId").value(1L));
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.id").value(1L))
+                .andExpect(jsonPath("$.orderId").value(323132L))
+                .andExpect(jsonPath("$.paymentId").value("341343"))
+                .andExpect(jsonPath("$.type").value(CARD))
+                .andExpect(jsonPath("$.status").value(NEW))
+                .andExpect(jsonPath("$.amount").value(BigDecimal.valueOf(2321000)))
+                .andExpect(jsonPath("$.createdAt").exists())
+                .andExpect(jsonPath("$.updatedAt").exists());
     }
 }

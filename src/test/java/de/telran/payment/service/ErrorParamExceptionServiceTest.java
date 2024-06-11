@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
-public class PurchaseOrderServiceTest {
+public class ErrorParamExceptionServiceTest {
     @Mock
     private PurchaseOrderRepository purchaseOrderRepositoryMock;
 

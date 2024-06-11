@@ -16,7 +16,7 @@ import static de.telran.payment.enums.StatusPayment.NEW;
 import static de.telran.payment.enums.Type.CARD;
 
 @DataJpaTest
-class PurchaseOrderRepositoryTest {
+class ErrorParamExceptionRepositoryTest {
     @Autowired
     private PurchaseOrderRepository purchaseOrderTest;
 
