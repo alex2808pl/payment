@@ -10,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -18,8 +17,7 @@ import java.util.List;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -73,6 +71,15 @@ class RecipientControllerTest {
     }
 
     @Test
+    void getRecipientByIdTest() throws Exception {
+        when(recipientServiceMock.getRecipientById(2L)).thenReturn(recipientExpected2);
+        this.mockMvc.perform(get("/recipient/{id}", 2)).andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists());
+
+    }
+
+    @Test
     void insertRecipientTest() throws Exception {
         RecipientDto recipientInsert = RecipientDto.builder()
                 .card("1234567890")
@@ -113,5 +120,33 @@ class RecipientControllerTest {
 //                .andExpect(jsonPath("$.userID").value(1));
 
 
+    }
+
+    @Test
+    void deleteRecipientByIdTest() {
+//(recipientServiceMock.deleteRecipientById(1L)).thenReturn(null);
+        //   this.mockMvc.perform(recipientServiceMock.deleteRecipientById(1L))
+    }
+
+    @Test
+    void updateRecipientTest() throws Exception {
+        RecipientDto updatedRecipient = RecipientDto.builder()
+                .id(1L)
+                .name("Unknown")
+                .paypalId("987654321")
+                .card("2547891")
+                .createdAt(Timestamp.valueOf(LocalDateTime.now()))
+                .updatedAt(Timestamp.valueOf(LocalDateTime.now()))
+                .build();
+
+        when(recipientServiceMock.updateRecipient(any(RecipientDto.class))).thenReturn(updatedRecipient);
+        String requestBody = objectMapper.writeValueAsString(updatedRecipient);
+        this.mockMvc.perform(put("/recipient")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(requestBody))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.id").value(1));
     }
 }
