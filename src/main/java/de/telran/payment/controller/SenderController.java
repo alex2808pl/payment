@@ -1,12 +1,17 @@
 package de.telran.payment.controller;
 
 import de.telran.payment.dto.SenderDto;
+import de.telran.payment.exception.ErrorParamException;
+import de.telran.payment.exception.NotFoundInDbException;
 import de.telran.payment.service.SenderService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.spi.ErrorMessage;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 
@@ -42,8 +47,20 @@ public class SenderController {
 
     @PutMapping
     @ResponseStatus(HttpStatus.OK)
-    public SenderDto updateSender(@RequestBody SenderDto senderDto) {
+    public SenderDto updateSender(@RequestBody SenderDto senderDto) throws FileNotFoundException {
         return senderService.updateSender(senderDto);
     }
+    @ExceptionHandler(ErrorParamException.class)
+    public ResponseEntity<ErrorMessage> handleException(ErrorParamException exception) {
+        return ResponseEntity
+                .status(HttpStatus.BAD_REQUEST)
+                .body(new ErrorMessage(exception.getMessage()));
+    }
 
+    @ExceptionHandler(NotFoundInDbException.class)
+    public ResponseEntity<ErrorMessage> handleException(NotFoundInDbException exception) {
+        return ResponseEntity
+                .status(HttpStatus.NOT_FOUND)
+                .body(new ErrorMessage(exception.getMessage()+"!!!!!!!!!!"));
+    }
 }
