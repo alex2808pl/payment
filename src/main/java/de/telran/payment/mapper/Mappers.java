@@ -2,8 +2,10 @@ package de.telran.payment.mapper;
 
 import de.telran.payment.dto.PurchaseOrderDto;
 import de.telran.payment.dto.RecipientDto;
+import de.telran.payment.dto.SenderDto;
 import de.telran.payment.entity.PurchaseOrder;
 import de.telran.payment.entity.Recipient;
+import de.telran.payment.entity.Sender;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
@@ -42,5 +44,17 @@ public class Mappers {
         return purchaseOrderDto;
     }
 
+    public SenderDto convertToSenderDto(Sender sender) {
+        modelMapper.typeMap(Sender.class, SenderDto.class)
+                .addMappings(mapper -> mapper.skip(SenderDto::setIban));
 
+        SenderDto senderDto = modelMapper.map(sender, SenderDto.class); //автомат
+        return senderDto;
+    }
+
+    public Sender convertToSender(SenderDto senderDto) {
+        Sender sender = modelMapper.map(senderDto, Sender.class); // автомат
+        sender.setUpdatedAt(new Timestamp(System.currentTimeMillis()));
+        return sender;
+    }
 }
