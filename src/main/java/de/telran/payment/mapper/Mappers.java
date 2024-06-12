@@ -24,6 +24,11 @@ public class Mappers {
         return recipientDto;
     }
 
+    public PurchaseOrder convertToPurchaseOrder(PurchaseOrderDto categoriesDto) {
+        PurchaseOrder categories = modelMapper.map(categoriesDto, PurchaseOrder.class);
+        return categories;
+    }
+
     public Recipient convertToRecipient(RecipientDto recipientDto) {
         Recipient recipient = modelMapper.map(recipientDto, Recipient.class); //автомат
         recipient.setUpdatedAt(new Timestamp(System.currentTimeMillis())); // можем заменить собственнім значением
