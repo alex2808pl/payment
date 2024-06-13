@@ -8,6 +8,7 @@ import de.telran.payment.entity.Recipient;
 import de.telran.payment.entity.Sender;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -15,7 +16,8 @@ import java.sql.Timestamp;
 @Component
 @RequiredArgsConstructor
 public class Mappers {
-    private final ModelMapper modelMapper;
+    @Autowired
+    private ModelMapper modelMapper;
 
     public RecipientDto convertToRecipientDto(Recipient recipient) {
         // перенастраиваю автомат, чтобы он пропустил поле iban и не отдал его клиенту
@@ -38,10 +40,15 @@ public class Mappers {
     }
 
     public PurchaseOrderDto convertToPurchaseOrderDto(PurchaseOrder purchaseOrder) {
-        PurchaseOrderDto purchaseOrderDto = modelMapper.map(purchaseOrder, PurchaseOrderDto.class); //автомат
-        //подключаем руками нужный нам конвертор для подчиненного объекта, вместо автоматического
-        purchaseOrderDto.setRecipient(convertToRecipientDto(purchaseOrder.getRecipient()));
+        modelMapper.typeMap(PurchaseOrder.class, PurchaseOrderDto.class)
+                .addMappings(mapper -> mapper.skip(PurchaseOrderDto::setSender));
+        PurchaseOrderDto purchaseOrderDto = modelMapper.map(purchaseOrder, PurchaseOrderDto.class);
+        purchaseOrderDto.setSender(null);
         return purchaseOrderDto;
+//        PurchaseOrderDto purchaseOrderDto = modelMapper.map(purchaseOrder, PurchaseOrderDto.class); //автомат
+//        //подключаем руками нужный нам конвертор для подчиненного объекта, вместо автоматического
+//        purchaseOrderDto.setRecipient(convertToRecipientDto(purchaseOrder.getRecipient()));
+//        return purchaseOrderDto;
     }
 
     public SenderDto convertToSenderDto(Sender sender) {

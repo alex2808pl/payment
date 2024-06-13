@@ -5,6 +5,7 @@ import de.telran.payment.dto.PurchaseOrderDto;
 import de.telran.payment.dto.SenderDto;
 import de.telran.payment.entity.PurchaseOrder;
 import de.telran.payment.entity.Sender;
+import de.telran.payment.exception.NotFoundInDbException;
 import de.telran.payment.mapper.Mappers;
 import de.telran.payment.repository.PurchaseOrderRepository;
 import de.telran.payment.repository.RecipientRepository;
@@ -33,6 +34,8 @@ public class PurchaseOrderService {
     }
 
     public PurchaseOrderDto getPurchaseOrderById(Long id) {
+        PurchaseOrder purchaseOrder = purchaseOrderRepository.findById(id)
+                .orElseThrow(() -> new NotFoundInDbException("Не найдена запись с таким Id"));
         Optional<PurchaseOrder> purchaseOrderOptional = purchaseOrderRepository.findById(id);
         PurchaseOrderDto purchaseOrderDto = null;
         if (purchaseOrderOptional.isPresent()) {
@@ -85,4 +88,6 @@ public class PurchaseOrderService {
 
         return mappers.convertToPurchaseOrderDto(savedCategory);
     }
+
+
 }

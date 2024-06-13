@@ -6,6 +6,7 @@ import de.telran.payment.exception.NotFoundInDbException;
 import de.telran.payment.service.PurchaseOrderService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.spi.ErrorMessage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +17,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping(value = "/purchase_order")
 public class PurchaseOrderController {
-    private final PurchaseOrderService purchaseOrderService;
+    @Autowired
+    private PurchaseOrderService purchaseOrderService;
 
     @GetMapping
     @ResponseStatus(HttpStatus.OK)
