@@ -45,16 +45,9 @@ public class Mappers {
         PurchaseOrderDto purchaseOrderDto = modelMapper.map(purchaseOrder, PurchaseOrderDto.class);
         purchaseOrderDto.setSender(null);
         return purchaseOrderDto;
-//        PurchaseOrderDto purchaseOrderDto = modelMapper.map(purchaseOrder, PurchaseOrderDto.class); //автомат
-//        //подключаем руками нужный нам конвертор для подчиненного объекта, вместо автоматического
-//        purchaseOrderDto.setRecipient(convertToRecipientDto(purchaseOrder.getRecipient()));
-//        return purchaseOrderDto;
     }
 
     public SenderDto convertToSenderDto(Sender sender) {
-        modelMapper.typeMap(Sender.class, SenderDto.class)
-                .addMappings(mapper -> mapper.skip(SenderDto::setIban));
-
         SenderDto senderDto = modelMapper.map(sender, SenderDto.class); //автомат
         return senderDto;
     }
